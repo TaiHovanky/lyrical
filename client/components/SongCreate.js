@@ -14,7 +14,7 @@ class SongCreate extends Component {
 
     onSubmit (event) {
         event.preventDefault();
-
+        //when calling the mutation function, pass in an object with the variables needed to run query
         this.props.mutate({
             variables: {
                 title: this.state.title
@@ -22,6 +22,8 @@ class SongCreate extends Component {
             refetchQueries: [{
                 query
             }] // re-run query to fetch songs so that we see the song list with the new song added
+            //this way of doing refetchQueries works better for songCreate because the queries aren't 
+            //used to populate this component. Whether or not query is in component determines if we use refetch
         }).then(() => {
             hashHistory.push('/')
         });
